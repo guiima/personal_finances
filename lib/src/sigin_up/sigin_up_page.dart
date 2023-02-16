@@ -4,6 +4,10 @@ import 'package:mobx/mobx.dart';
 import 'package:personal_finances/src/auth/auth_page.dart';
 import 'package:personal_finances/src/sigin_up/sigin_up_controller.dart';
 import 'package:personal_finances/src/sigin_up/sigin_up_errors.dart';
+import 'package:personal_finances/src/styles/app_colors.dart';
+import 'package:personal_finances/src/widgets/elevated_button/elevated_button_component.dart';
+import 'package:personal_finances/src/widgets/text_form_field/text_form_field_component.dart';
+import 'package:personal_finances/src/utils/extensions/padding.dart';
 
 class SiginUpPage extends StatefulWidget {
   const SiginUpPage({super.key});
@@ -63,84 +67,70 @@ class _SiginUpPageState extends State<SiginUpPage> {
       color: Colors.white,
       child: SafeArea(
         child: Scaffold(
-          appBar: AppBar(
-            title: const Text('Agro é tech'),
-          ),
           body: Observer(
             builder: (BuildContext context) {
-              return Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    TextFormField(
-                      autofocus: false,
-                      decoration: const InputDecoration(
-                        hintText: 'e-mail',
-                        contentPadding: EdgeInsets.only(left: 8.0),
-                      ),
-                      onChanged: (String value) =>
-                          _controller.setEmail(value: value),
-                    ),
-                    TextFormField(
-                      autofocus: false,
-                      obscureText: true,
-                      enableSuggestions: false,
-                      autocorrect: false,
-                      decoration: const InputDecoration(
-                        hintText: 'senha',
-                        contentPadding: EdgeInsets.only(left: 8.0),
-                      ),
-                      onChanged: (String value) =>
-                          _controller.setPassword(value: value),
-                    ),
-                    TextFormField(
-                      autofocus: false,
-                      obscureText: true,
-                      enableSuggestions: false,
-                      autocorrect: false,
-                      decoration: const InputDecoration(
-                        hintText: 'confirme a senha',
-                        contentPadding: EdgeInsets.only(left: 8.0),
-                      ),
-                      onChanged: (String value) =>
-                          _controller.setConfirmPassword(value: value),
-                    ),
-                    if (_controller.hasError.isSome())
-                      SizedBox(
-                        width: double.infinity,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(_controller.messageError),
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  TextFormFieldComponent(
+                    labelText: 'E-mail',
+                    onChanged: (String value) =>
+                        _controller.setEmail(value: value),
+                  ).paddingBottom(24),
+                  TextFormFieldComponent(
+                    labelText: 'Senha',
+                    obscureText: true,
+                    onChanged: (String value) =>
+                        _controller.setPassword(value: value),
+                  ).paddingBottom(24),
+                  TextFormFieldComponent(
+                    labelText: 'Confirme a senha',
+                    obscureText: true,
+                    onChanged: (String value) =>
+                        _controller.setConfirmPassword(value: value),
+                  ),
+                  if (_controller.hasError.isSome())
+                    SizedBox(
+                      width: double.infinity,
+                      child: Text(
+                        _controller.messageError,
+                        style: TextStyle(
+                          color: AppColors.textError,
                         ),
-                      ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
-                      child: ElevatedButton(
-                          child: const Text('Cadastrar'),
-                          onPressed: () {
-                            _controller.createUserWithEmailAndPasswordUsecase();
-                          }),
+                      ).paddingLeft(16).paddingTop(4),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        const Text('Já possui cadastro?'),
-                        TextButton(
-                          child: const Text('Volte ao login.'),
-                          onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute<AuthPage>(
-                                builder: (_) => const AuthPage(),
-                              ),
-                            );
-                          },
+                  ElevatedButtonComponent(
+                    buttonText: 'Cadastrar',
+                    onPressed: _controller.isNotEmptyFields
+                        ? () =>
+                            _controller.createUserWithEmailAndPasswordUsecase()
+                        : null,
+                  ).paddingTop(24),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'Já possui cadastro?',
+                        style: TextStyle(color: AppColors.subTitle),
+                      ),
+                      TextButton(
+                        child: Text(
+                          'Faça o login',
+                          style: TextStyle(color: AppColors.primaryTitle),
                         ),
-                      ],
-                    )
-                  ],
-                ),
-              );
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute<AuthPage>(
+                              builder: (_) => const AuthPage(),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  ).paddingTop(8),
+                ],
+              ).paddingAll(20);
             },
           ),
         ),

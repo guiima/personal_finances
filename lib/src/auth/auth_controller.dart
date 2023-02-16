@@ -17,6 +17,9 @@ abstract class AuthControllerBase with Store {
   @observable
   String password = '';
 
+  @computed
+  bool get isNotEmptyFields => email.isNotEmpty && password.isNotEmpty;
+
   @action
   Future<void> signInWithEmailAndPassword() async {
     final Either<Exception, Unit> response =

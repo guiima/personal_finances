@@ -19,6 +19,10 @@ abstract class SiginUpControllerBase with Store {
   @observable
   String confirmPassword = '';
 
+  @computed
+  bool get isNotEmptyFields =>
+      email.isNotEmpty && password.isNotEmpty && confirmPassword.isNotEmpty;
+
   @observable
   Option<Exception> hasError = none();
 

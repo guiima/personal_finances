@@ -4,6 +4,7 @@ Color blue = const Color(0xFF242F66);
 Color white = const Color(0xFFFFFFFF);
 Color gray = const Color(0xFF49454F);
 Color ligthGray = const Color(0xFF79747E);
+Color red = const Color(0xFFB3261E);
 
 class AppColors {
   static Color primaryColor = blue;
@@ -11,4 +12,5 @@ class AppColors {
   static Color primaryTitleInDarkBackground = white;
   static Color subTitle = gray;
   static Color body = ligthGray;
+  static Color textError = red;
 }

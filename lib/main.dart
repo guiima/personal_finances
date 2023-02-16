@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:personal_finances/firebase_options.dart';
+import 'package:personal_finances/src/styles/app_colors.dart';
 import 'package:personal_finances/widget_tree.dart';
 
 void main() async {
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         useMaterial3: true,
-        colorSchemeSeed: const Color(0xFF242F66),
+        colorSchemeSeed: AppColors.primaryColor,
       ),
       home: const WidgetTree(),
     );
