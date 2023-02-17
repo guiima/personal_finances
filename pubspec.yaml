@@ -43,6 +43,8 @@ dependencies:
   mobx_codegen: ^2.1.1
   dartz: ^0.10.1
   flutter_svg: ^1.1.6
+  carousel_slider: ^4.2.1
+  shared_preferences: ^2.0.17
 
 dev_dependencies:
   flutter_test:
@@ -70,6 +72,9 @@ flutter:
   assets:
     - assets/facebook.svg
     - assets/google.svg
+    - assets/money_piggy.svg
+    - assets/static_chart.svg
+    - assets/projections.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
-import 'package:personal_finances/src/auth/auth_page.dart';
+import 'package:personal_finances/src/routes/app_routes.dart';
 import 'package:personal_finances/src/sigin_up/sigin_up_controller.dart';
 import 'package:personal_finances/src/sigin_up/sigin_up_errors.dart';
 import 'package:personal_finances/src/styles/app_colors.dart';
@@ -119,13 +119,8 @@ class _SiginUpPageState extends State<SiginUpPage> {
                           'Faça o login',
                           style: TextStyle(color: AppColors.primaryTitle),
                         ),
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute<AuthPage>(
-                              builder: (_) => const AuthPage(),
-                            ),
-                          );
-                        },
+                        onPressed: () =>
+                            Navigator.of(context).pushNamed(AppRoutes.auth),
                       ),
                     ],
                   ).paddingTop(8),

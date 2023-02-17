@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:personal_finances/src/auth/auth_controller.dart';
+import 'package:personal_finances/src/routes/app_routes.dart';
 import 'package:personal_finances/src/sigin_up/sigin_up_page.dart';
 import 'package:personal_finances/src/styles/app_colors.dart';
 import 'package:personal_finances/src/widgets/elevated_button/elevated_button_component.dart';
@@ -83,13 +84,8 @@ class _AuthPageState extends State<AuthPage> {
                           'Cadastre-se',
                           style: TextStyle(color: AppColors.primaryTitle),
                         ),
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute<SiginUpPage>(
-                              builder: (_) => const SiginUpPage(),
-                            ),
-                          );
-                        },
+                        onPressed: () =>
+                            Navigator.of(context).pushNamed(AppRoutes.siginUp),
                       ),
                     ],
                   ).paddingTop(12)
