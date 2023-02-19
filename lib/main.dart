@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:personal_finances/firebase_options.dart';
 import 'package:personal_finances/src/routes/app_routes.dart';
 import 'package:personal_finances/src/routes/routes.dart';
@@ -42,7 +43,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         colorSchemeSeed: AppColors.primaryColor,
+        appBarTheme: AppBarTheme(
+          color: AppColors.primaryColor,
+          foregroundColor: AppColors.secondaryColor,
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: AppColors.primaryColor,
+          ),
+        ),
       ),
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       initialRoute: initialScreen,
       routes: routes,
