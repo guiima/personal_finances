@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:mobx/mobx.dart';
-import 'package:personal_finances/src/auth/auth_service.dart';
+import 'package:personal_finances/src/pages/auth/auth_service.dart';
 
 part 'auth_controller.g.dart';
 

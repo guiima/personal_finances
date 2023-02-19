@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
+import 'package:personal_finances/src/pages/sigin_up/sigin_up_controller.dart';
+import 'package:personal_finances/src/pages/sigin_up/sigin_up_errors.dart';
 import 'package:personal_finances/src/routes/app_routes.dart';
-import 'package:personal_finances/src/sigin_up/sigin_up_controller.dart';
-import 'package:personal_finances/src/sigin_up/sigin_up_errors.dart';
+
 import 'package:personal_finances/src/styles/app_colors.dart';
 import 'package:personal_finances/src/widgets/elevated_button/elevated_button_component.dart';
 import 'package:personal_finances/src/widgets/text_form_field/text_form_field_component.dart';

@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:personal_finances/src/auth/auth_page.dart';
-import 'package:personal_finances/src/home/home_page.dart';
+import 'package:personal_finances/src/pages/auth/auth_page.dart';
+import 'package:personal_finances/src/pages/home/home_page.dart';
 
 class WidgetTree extends StatefulWidget {
   const WidgetTree({Key? key}) : super(key: key);

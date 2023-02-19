@@ -2,9 +2,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:personal_finances/src/onboarding/carousel_item_component.dart';
-import 'package:personal_finances/src/onboarding/onboarding_controller.dart';
-import 'package:personal_finances/src/onboarding/page_incidator_component.dart';
+import 'package:personal_finances/src/pages/onboarding/carousel_item_component.dart';
+import 'package:personal_finances/src/pages/onboarding/onboarding_controller.dart';
+import 'package:personal_finances/src/pages/onboarding/page_incidator_component.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OnboardingPage extends StatefulWidget {

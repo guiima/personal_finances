@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:mobx/mobx.dart';
-import 'package:personal_finances/src/sigin_up/sigin_up_errors.dart';
-import 'package:personal_finances/src/sigin_up/sigin_up_service.dart';
+import 'package:personal_finances/src/pages/sigin_up/sigin_up_errors.dart';
+import 'package:personal_finances/src/pages/sigin_up/sigin_up_service.dart';
 
 part 'sigin_up_controller.g.dart';
 

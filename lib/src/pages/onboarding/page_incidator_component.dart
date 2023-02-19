@@ -1,7 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:personal_finances/src/auth/auth_page.dart';
-import 'package:personal_finances/src/onboarding/carousel_item_component.dart';
+import 'package:personal_finances/src/pages/onboarding/carousel_item_component.dart';
 import 'package:personal_finances/src/routes/app_routes.dart';
 import 'package:personal_finances/src/styles/app_colors.dart';
 import 'package:personal_finances/src/utils/extensions/padding.dart';
@@ -56,11 +55,6 @@ class _PageIndicatorComponentState extends State<PageIndicatorComponent> {
           ).toList(),
         ),
         TextButton(
-          // onPressed: () => Navigator.of(context).push(
-          //   MaterialPageRoute<AuthPage>(
-          //     builder: (_) => const AuthPage(),
-          //   ),
-          // ),
           onPressed: () => Navigator.of(context).pushNamed(AppRoutes.auth),
           child: const Text(
             'Pular',

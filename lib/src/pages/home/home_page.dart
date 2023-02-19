@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:personal_finances/src/home/home_controller.dart';
+import 'package:personal_finances/src/pages/home/home_controller.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

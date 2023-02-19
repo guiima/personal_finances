@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:personal_finances/src/auth/auth_controller.dart';
-import 'package:personal_finances/src/routes/app_routes.dart';
-import 'package:personal_finances/src/sigin_up/sigin_up_page.dart';
+import 'package:personal_finances/src/pages/auth/auth_controller.dart';
 import 'package:personal_finances/src/styles/app_colors.dart';
 import 'package:personal_finances/src/widgets/elevated_button/elevated_button_component.dart';
 import 'package:personal_finances/src/widgets/provider_sigin_button/provider_sigin_button.dart';

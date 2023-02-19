@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:personal_finances/src/auth/auth_page.dart';
-import 'package:personal_finances/src/home/home_page.dart';
-import 'package:personal_finances/src/onboarding/onboarding_page.dart';
+import 'package:personal_finances/src/pages/auth/auth_page.dart';
+import 'package:personal_finances/src/pages/home/home_page.dart';
+import 'package:personal_finances/src/pages/onboarding/onboarding_page.dart';
+import 'package:personal_finances/src/pages/sigin_up/sigin_up_page.dart';
+
 import 'package:personal_finances/src/routes/app_routes.dart';
-import 'package:personal_finances/src/sigin_up/sigin_up_page.dart';
 import 'package:personal_finances/src/widgets/widget_tree/widget_tree.dart';
 
 final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
