@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:personal_finances/src/pages/income/income_controller.dart';
 import 'package:personal_finances/src/styles/app_colors.dart';
 import 'package:personal_finances/src/widgets/app_bar/app_bar_component.dart';
 import 'package:personal_finances/src/utils/extensions/padding.dart';
+import 'package:personal_finances/src/widgets/bottom_navigation_bar/bottom_navigation_bar_component.dart';
 import 'package:personal_finances/src/widgets/card/card_component.dart';
+import 'package:personal_finances/src/widgets/elevated_button/elevated_button_component.dart';
+import 'package:personal_finances/src/widgets/text_form_field/text_form_field_component.dart';
 
 class IncomePage extends StatefulWidget {
   const IncomePage({super.key});
@@ -12,12 +16,15 @@ class IncomePage extends StatefulWidget {
 }
 
 class _IncomePageState extends State<IncomePage> {
+  IncomeController _controller = IncomeController();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: const AppBarComponent(
           title: 'Receitas',
+          haveArrowBAck: true,
         ),
         body: Container(
           color: AppColors.backgroundColor,
@@ -62,41 +69,67 @@ class _IncomePageState extends State<IncomePage> {
           ).paddingHorizontal(15),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            _mostrarDialogo(context);
+          },
           tooltip: 'Increment',
           backgroundColor: AppColors.primaryColor,
           foregroundColor: AppColors.secondaryColor,
+          shape: const CircleBorder(),
           child: const Icon(Icons.add),
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          // onTap: () {},
-          currentIndex: 1,
-          backgroundColor: AppColors.tertiaryColor,
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.equalizer,
-                color: AppColors.primaryColor,
+      ),
+    );
+  }
+
+  void _mostrarDialogo(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Center(
+            child: Text(
+              'Nova Receita',
+              style: TextStyle(
+                color: AppColors.primaryTitle,
+                fontWeight: FontWeight.w500,
               ),
-              label: 'Estatística',
             ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-                color: AppColors.primaryColor,
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              TextFormFieldComponent(
+                labelText: 'Receita',
+                onChanged: (String value) => _controller.setIncome(value),
+              ).paddingBottom(7),
+              TextFormFieldComponent(
+                labelText: 'Valor',
+                onChanged: (String value) => _controller.setValue(value),
               ),
-              label: 'Home',
+            ],
+          ),
+          actions: <Widget>[
+            ElevatedButtonComponent(
+              buttonText: 'Salvar',
+              onPressed: () => Navigator.of(context).pop(),
             ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.person,
-                color: AppColors.primaryColor,
+            Center(
+              child: TextButton(
+                child: Text(
+                  'Cancelar',
+                  style: TextStyle(
+                    color: AppColors.primaryTitle,
+                  ),
+                ),
+                // onPressed: () =>
+                //     Navigator.of(context).pushNamed(AppRoutes.siginUp),
+                onPressed: () => Navigator.of(context).pop(),
               ),
-              label: 'Profile',
             ),
           ],
-        ),
-      ),
+        );
+      },
     );
   }
 }

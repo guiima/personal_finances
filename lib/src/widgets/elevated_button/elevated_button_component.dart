@@ -21,10 +21,12 @@ class ElevatedButtonComponent extends StatelessWidget {
           40,
         ), // define a altura mínima do botão
       ),
-      child: Text(
-        buttonText,
-        style: const TextStyle(
-          color: Colors.white, // define a cor do texto
+      child: Center(
+        child: Text(
+          buttonText,
+          style: const TextStyle(
+            color: Colors.white, // define a cor do texto
+          ),
         ),
       ),
     );

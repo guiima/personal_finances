@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:personal_finances/src/pages/home/home_controller.dart';
 import 'package:personal_finances/src/routes/app_routes.dart';
+import 'package:personal_finances/src/widgets/app_bar/app_bar_component.dart';
+import 'package:personal_finances/src/widgets/bottom_navigation_bar/bottom_navigation_bar_component.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,8 +18,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Agro é top'),
+        appBar: const AppBarComponent(
+          title: '',
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -41,6 +43,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
+        bottomNavigationBar: const BottomNavigationBarComponent(),
       ),
     );
   }
