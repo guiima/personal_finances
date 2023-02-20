@@ -16,6 +16,7 @@ class _WidgetTreeState extends State<WidgetTree> {
     return StreamBuilder<User?>(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
+        print(snapshot.data);
         if (snapshot.hasData) {
           return const HomePage();
         } else {

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:personal_finances/src/global_states/user/user.dart';
 import 'package:personal_finances/src/pages/home/home_controller.dart';
 import 'package:personal_finances/src/routes/app_routes.dart';
 import 'package:personal_finances/src/widgets/app_bar/app_bar_component.dart';
 import 'package:personal_finances/src/widgets/bottom_navigation_bar/bottom_navigation_bar_component.dart';
+import 'package:personal_finances/src/utils/extensions/padding.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,6 +15,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final HomeController _controller = HomeController();
+  final UserModel _userModel = UserModel.instace;
 
   @override
   Widget build(BuildContext context) {
@@ -21,27 +24,39 @@ class _HomePageState extends State<HomePage> {
         appBar: const AppBarComponent(
           title: '',
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: SizedBox(
-            width: double.infinity,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                const Text('Bem vindo ao Agro'),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                    child: const Text('Sair'),
-                    // onPressed: () => _controller.signOut(),
-                    onPressed: () =>
-                        Navigator.of(context).pushNamed(AppRoutes.income),
-                  ),
+        body: AnimatedBuilder(
+          animation: _userModel,
+          builder: (BuildContext context, Widget? child) {
+            return Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: SizedBox(
+                width: double.infinity,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text('${_userModel.counter}'),
+                    ElevatedButton(
+                      child: const Text('somar'),
+                      // onPressed: () => _controller.signOut(),
+                      onPressed: () => _userModel.incrementCounter(),
+                    ).paddingAll(8),
+                    ElevatedButton(
+                      child: const Text('Ir para Receitas'),
+                      // onPressed: () => _controller.signOut(),
+                      onPressed: () =>
+                          Navigator.of(context).pushNamed(AppRoutes.income),
+                    ).paddingAll(8),
+                    ElevatedButton(
+                      child: const Text('get users'),
+                      // onPressed: () => _controller.signOut(),
+                      onPressed: () => _controller.getUser(),
+                    ).paddingTop(20),
+                  ],
                 ),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         ),
         bottomNavigationBar: const BottomNavigationBarComponent(),
       ),

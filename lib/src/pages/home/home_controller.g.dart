@@ -17,6 +17,14 @@ mixin _$HomeController on HomeControllerBase, Store {
     return _$signOutAsyncAction.run(() => super.signOut());
   }
 
+  late final _$getUserAsyncAction =
+      AsyncAction('HomeControllerBase.getUser', context: context);
+
+  @override
+  Future<void> getUser() {
+    return _$getUserAsyncAction.run(() => super.getUser());
+  }
+
   @override
   String toString() {
     return '''
