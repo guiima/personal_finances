@@ -40,6 +40,17 @@ mixin _$OnboardinglController on OnboardinglControllerBase, Store {
   }
 
   @override
+  void finisheOnboardingShow() {
+    final _$actionInfo = _$OnboardinglControllerBaseActionController
+        .startAction(name: 'OnboardinglControllerBase.finisheOnboardingShow');
+    try {
+      return super.finisheOnboardingShow();
+    } finally {
+      _$OnboardinglControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 currentIndex: ${currentIndex}

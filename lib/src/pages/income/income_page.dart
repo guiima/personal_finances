@@ -19,7 +19,7 @@ class IncomePage extends StatefulWidget {
 
 class _IncomePageState extends State<IncomePage> {
   final IncomeController _controller = IncomeController();
-  final UserModel _userModel = UserModel.instace;
+  final UserModel1 _userModel = UserModel1.instace;
 
   @override
   Widget build(BuildContext context) {

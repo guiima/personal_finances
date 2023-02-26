@@ -27,16 +27,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
     initializeCarousel();
 
     SchedulerBinding.instance.scheduleFrameCallback((_) {
-      finisheOnboardingShow();
+      _onboardinglController.finisheOnboardingShow();
     });
 
     super.initState();
-  }
-
-  void finisheOnboardingShow() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    await prefs.setBool('onboarding_shown', true);
   }
 
   @override

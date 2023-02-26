@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 
-class UserModel extends ChangeNotifier {
+class UserModel1 extends ChangeNotifier {
   int _counter = 0;
 
   int get counter => _counter;
 
-  static UserModel instace = UserModel();
+  static UserModel1 instace = UserModel1();
 
   void incrementCounter() {
     _counter++;

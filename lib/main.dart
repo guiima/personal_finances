@@ -2,15 +2,16 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:personal_finances/firebase_options.dart';
-import 'package:personal_finances/src/routes/app_routes.dart';
+import 'package:personal_finances/src/pages/onboarding/onboarding_service.dart';
 import 'package:personal_finances/src/routes/routes.dart';
 import 'package:personal_finances/src/styles/app_colors.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  String initialScreen = await verifyOnboardingShown();
+  OnboardingService onboardingService = OnboardingService();
+
+  String initialScreen = await onboardingService.verifyOnboardingShown();
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -19,14 +20,6 @@ void main() async {
   runApp(
     MyApp(initialScreen: initialScreen),
   );
-}
-
-Future<String> verifyOnboardingShown() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-
-  bool onboardingShown = prefs.getBool('onboarding_shown') ?? false;
-
-  return onboardingShown ? AppRoutes.widgetTree : AppRoutes.onboarding;
 }
 
 class MyApp extends StatelessWidget {

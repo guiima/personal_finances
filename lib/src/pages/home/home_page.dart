@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:personal_finances/src/global_states/user/user.dart';
+import 'package:personal_finances/src/global_states/user/user_service.dart';
 import 'package:personal_finances/src/pages/home/home_controller.dart';
 import 'package:personal_finances/src/routes/app_routes.dart';
 import 'package:personal_finances/src/widgets/app_bar/app_bar_component.dart';
@@ -15,7 +16,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final HomeController _controller = HomeController();
-  final UserModel _userModel = UserModel.instace;
+  final UserModel1 _userModel = UserModel1.instace;
+  final UserService service = UserService();
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +52,12 @@ class _HomePageState extends State<HomePage> {
                     ElevatedButton(
                       child: const Text('get users'),
                       // onPressed: () => _controller.signOut(),
-                      onPressed: () => _controller.getUser(),
+                      onPressed: () => service.getUserByUid(),
+                    ).paddingTop(20),
+                    ElevatedButton(
+                      child: const Text('set users'),
+                      // onPressed: () => _controller.signOut(),
+                      onPressed: () => service.addUser(),
                     ).paddingTop(20),
                   ],
                 ),
