@@ -2,29 +2,34 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:personal_finances/src/global_states/user/user_model.dart';
+import 'package:personal_finances/src/global_states/user/user_state.dart';
 
 class UserService {
-  static const String collection = 'users';
+  final UserState _userState = UserState.instace;
+  static const String _collection = 'users';
 
-  String? get uid => FirebaseAuth.instance.currentUser?.uid;
+  String? get _uid => FirebaseAuth.instance.currentUser?.uid;
 
-  String? get email => FirebaseAuth.instance.currentUser?.email;
+  // String? get _email => FirebaseAuth.instance.currentUser?.email;
 
-  Future<Either<Exception, UserModel>> getUserByUid() async {
+  Future<Either<Exception, Unit>> getUserByUidAndSalveInGlobalState() async {
     try {
-      if (uid == null) {
+      if (_uid == null) {
         return left(Exception());
       }
 
       DocumentReference<dynamic> docRef =
-          FirebaseFirestore.instance.collection(collection).doc(uid);
+          FirebaseFirestore.instance.collection(_collection).doc(_uid);
 
       DocumentSnapshot<dynamic> docSnapshot = await docRef.get();
 
       if (docSnapshot.exists) {
-        UserModel user =
+        UserModel userModel =
             UserModel.fromJson(docSnapshot.data() as Map<String, dynamic>);
-        return right(user);
+
+        _userState.updateUserModel(userModel: userModel);
+
+        return right(unit);
       }
 
       return left(Exception());
@@ -33,23 +38,23 @@ class UserService {
     }
   }
 
-  Future<Either<Exception, Unit>> addUser() async {
+  Future<Either<Exception, Unit>> setUser({
+    required UserModel userModel,
+  }) async {
     try {
-      if (uid == null && email == null) {
+      if (_uid == null) {
         return left(Exception());
       }
 
-      CollectionReference<Map<String, dynamic>> usersRef =
-          FirebaseFirestore.instance.collection(collection);
+      CollectionReference<Map<String, dynamic>> colletionRef =
+          FirebaseFirestore.instance.collection(_collection);
 
-      DocumentReference<Map<String, dynamic>> newUserRef = usersRef.doc(uid);
+      DocumentReference<Map<String, dynamic>> userRef = colletionRef.doc(_uid);
 
-      UserModel user = UserModel(email: email!);
-
-      await newUserRef.set(user.toJson());
+      await userRef.set(userModel.toJson());
 
       final DocumentSnapshot<Map<String, dynamic>> snapshot =
-          await newUserRef.get();
+          await userRef.get();
 
       if (snapshot.exists) {
         return right(unit);

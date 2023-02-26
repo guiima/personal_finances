@@ -113,6 +113,16 @@ mixin _$SiginUpController on SiginUpControllerBase, Store {
     });
   }
 
+  late final _$createUserWithEmailAndPasswordUsecaseAsyncAction = AsyncAction(
+      'SiginUpControllerBase.createUserWithEmailAndPasswordUsecase',
+      context: context);
+
+  @override
+  Future<void> createUserWithEmailAndPasswordUsecase() {
+    return _$createUserWithEmailAndPasswordUsecaseAsyncAction
+        .run(() => super.createUserWithEmailAndPasswordUsecase());
+  }
+
   late final _$SiginUpControllerBaseActionController =
       ActionController(name: 'SiginUpControllerBase', context: context);
 

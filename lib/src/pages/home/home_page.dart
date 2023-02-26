@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:personal_finances/src/global_states/user/user.dart';
+import 'package:personal_finances/src/global_states/user/user_state.dart';
 import 'package:personal_finances/src/global_states/user/user_service.dart';
 import 'package:personal_finances/src/pages/home/home_controller.dart';
 import 'package:personal_finances/src/routes/app_routes.dart';
@@ -16,8 +16,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final HomeController _controller = HomeController();
-  final UserModel1 _userModel = UserModel1.instace;
-  final UserService service = UserService();
+
+  @override
+  void initState() {
+    _controller.initialize();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,44 +30,30 @@ class _HomePageState extends State<HomePage> {
         appBar: const AppBarComponent(
           title: '',
         ),
-        body: AnimatedBuilder(
-          animation: _userModel,
-          builder: (BuildContext context, Widget? child) {
-            return Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: SizedBox(
-                width: double.infinity,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Text('${_userModel.counter}'),
-                    ElevatedButton(
-                      child: const Text('somar'),
-                      // onPressed: () => _controller.signOut(),
-                      onPressed: () => _userModel.incrementCounter(),
-                    ).paddingAll(8),
-                    ElevatedButton(
-                      child: const Text('Ir para Receitas'),
-                      // onPressed: () => _controller.signOut(),
-                      onPressed: () =>
-                          Navigator.of(context).pushNamed(AppRoutes.income),
-                    ).paddingAll(8),
-                    ElevatedButton(
-                      child: const Text('get users'),
-                      // onPressed: () => _controller.signOut(),
-                      onPressed: () => service.getUserByUid(),
-                    ).paddingTop(20),
-                    ElevatedButton(
-                      child: const Text('set users'),
-                      // onPressed: () => _controller.signOut(),
-                      onPressed: () => service.addUser(),
-                    ).paddingTop(20),
-                  ],
-                ),
-              ),
-            );
-          },
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: SizedBox(
+            width: double.infinity,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                ElevatedButton(
+                  child: const Text('Sair'),
+                  onPressed: () => _controller.signOut(),
+                ).paddingAll(8),
+                ElevatedButton(
+                  child: const Text('Ir para Receitas'),
+                  onPressed: () =>
+                      Navigator.of(context).pushNamed(AppRoutes.income),
+                ).paddingAll(8),
+                ElevatedButton(
+                  child: const Text('initialize'),
+                  onPressed: () => _controller.initialize(),
+                ).paddingTop(20),
+              ],
+            ),
+          ),
         ),
         bottomNavigationBar: const BottomNavigationBarComponent(),
       ),

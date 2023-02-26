@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:personal_finances/src/pages/auth/auth_controller.dart';
+import 'package:personal_finances/src/routes/app_routes.dart';
 import 'package:personal_finances/src/styles/app_colors.dart';
 import 'package:personal_finances/src/widgets/elevated_button/elevated_button_component.dart';
 import 'package:personal_finances/src/widgets/provider_sigin_button/provider_sigin_button.dart';
@@ -83,9 +84,8 @@ class _AuthPageState extends State<AuthPage> {
                           'Cadastre-se',
                           style: TextStyle(color: AppColors.primaryTitle),
                         ),
-                        // onPressed: () =>
-                        //     Navigator.of(context).pushNamed(AppRoutes.siginUp),
-                        onPressed: () => testFirestore(),
+                        onPressed: () =>
+                            Navigator.of(context).pushNamed(AppRoutes.siginUp),
                       ),
                     ],
                   ).paddingTop(12)
@@ -96,26 +96,5 @@ class _AuthPageState extends State<AuthPage> {
         ),
       ),
     );
-  }
-
-  Future<void> testFirestore() async {
-    try {
-      CollectionReference users =
-          FirebaseFirestore.instance.collection('users');
-
-      return users.add({
-        'full_name': 'fullName', // John Doe
-        'company': 'company', // Stokes and Sons
-        'age': 'age' // 42
-      }).then(
-        (DocumentReference<Object?> value) {
-          print('User Added');
-        },
-      ).catchError((error) {
-        print('Failed to add user: $error');
-      });
-    } catch (e) {
-      print(e);
-    }
   }
 }

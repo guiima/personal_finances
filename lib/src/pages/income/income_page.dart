@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:personal_finances/src/global_states/user/user.dart';
+import 'package:personal_finances/src/global_states/user/user_state.dart';
 import 'package:personal_finances/src/pages/income/income_controller.dart';
 import 'package:personal_finances/src/styles/app_colors.dart';
 import 'package:personal_finances/src/widgets/app_bar/app_bar_component.dart';
 import 'package:personal_finances/src/utils/extensions/padding.dart';
-import 'package:personal_finances/src/widgets/bottom_navigation_bar/bottom_navigation_bar_component.dart';
 import 'package:personal_finances/src/widgets/card/card_component.dart';
 import 'package:personal_finances/src/widgets/elevated_button/elevated_button_component.dart';
 import 'package:personal_finances/src/widgets/text_form_field/text_form_field_component.dart';
@@ -19,7 +18,7 @@ class IncomePage extends StatefulWidget {
 
 class _IncomePageState extends State<IncomePage> {
   final IncomeController _controller = IncomeController();
-  final UserModel1 _userModel = UserModel1.instace;
+  final UserState _userModel = UserState.instace;
 
   @override
   Widget build(BuildContext context) {
@@ -36,19 +35,19 @@ class _IncomePageState extends State<IncomePage> {
               color: AppColors.backgroundColor,
               child: Column(
                 children: <Widget>[
-                  ElevatedButton(
-                    child: const Text('somar'),
-                    // onPressed: () => _controller.signOut(),
-                    onPressed: () => _userModel.incrementCounter(),
-                  ).paddingAll(8),
-                  Text(
-                    'Fevereiro ${_userModel.counter}',
-                    style: TextStyle(
-                      color: AppColors.body,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ).paddingTop(15.27),
+                  // ElevatedButton(
+                  //   child: const Text('somar'),
+                  //   // onPressed: () => _controller.signOut(),
+                  //   onPressed: () => _userModel.incrementCounter(),
+                  // ).paddingAll(8),
+                  // Text(
+                  //   'Fevereiro ${_userModel.counter}',
+                  //   style: TextStyle(
+                  //     color: AppColors.body,
+                  //     fontSize: 16,
+                  //     fontWeight: FontWeight.w600,
+                  //   ),
+                  // ).paddingTop(15.27),
                   Text(
                     'R\$ 1.000,00',
                     style: TextStyle(

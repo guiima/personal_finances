@@ -3,10 +3,10 @@ class UserModel {
   final String email;
   final List<IncomeModel> incomes;
   final List<ExpenseModel> expenses;
-  final List<InvestmentModel> investiments;
+  final List<InvestmentModel> investments;
   final List<DebtModel> debts;
   final List<GoalModel> goals;
-  final List<EmergencyReserveModel> emergencyReservations;
+  final List<EmergencyReserveModel> emergencyReserves;
   final List<OpportunityModel> opportunities;
 
   UserModel({
@@ -14,18 +14,17 @@ class UserModel {
     required this.email,
     List<IncomeModel>? incomes,
     List<ExpenseModel>? expenses,
-    List<InvestmentModel>? investiments,
+    List<InvestmentModel>? investments,
     List<DebtModel>? debts,
     List<GoalModel>? goals,
-    List<EmergencyReserveModel>? emergencyReservations,
+    List<EmergencyReserveModel>? emergencyReserves,
     List<OpportunityModel>? opportunities,
   })  : incomes = incomes ?? <IncomeModel>[],
         expenses = expenses ?? <ExpenseModel>[],
-        investiments = investiments ?? <InvestmentModel>[],
+        investments = investments ?? <InvestmentModel>[],
         debts = debts ?? <DebtModel>[],
         goals = goals ?? <GoalModel>[],
-        emergencyReservations =
-            emergencyReservations ?? <EmergencyReserveModel>[],
+        emergencyReserves = emergencyReserves ?? <EmergencyReserveModel>[],
         opportunities = opportunities ?? <OpportunityModel>[];
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -38,8 +37,8 @@ class UserModel {
       expenses: List<ExpenseModel>.from(
         json['expenses'].map((dynamic value) => ExpenseModel.fromJson(value)),
       ),
-      investiments: List<InvestmentModel>.from(
-        json['investiments']
+      investments: List<InvestmentModel>.from(
+        json['investments']
             .map((dynamic value) => InvestmentModel.fromJson(value)),
       ),
       debts: List<DebtModel>.from(
@@ -48,8 +47,8 @@ class UserModel {
       goals: List<GoalModel>.from(
         json['goals'].map((dynamic value) => GoalModel.fromJson(value)),
       ),
-      emergencyReservations: List<EmergencyReserveModel>.from(
-        json['emergencyReservations']
+      emergencyReserves: List<EmergencyReserveModel>.from(
+        json['emergencyReserves']
             .map((dynamic value) => EmergencyReserveModel.fromJson(value)),
       ),
       opportunities: List<OpportunityModel>.from(
@@ -65,16 +64,40 @@ class UserModel {
       'email': email,
       'incomes': incomes.map((IncomeModel x) => x.toJson()).toList(),
       'expenses': expenses.map((ExpenseModel x) => x.toJson()).toList(),
-      'investiments':
-          investiments.map((InvestmentModel x) => x.toJson()).toList(),
+      'investments':
+          investments.map((InvestmentModel x) => x.toJson()).toList(),
       'debts': debts.map((DebtModel x) => x.toJson()).toList(),
       'goals': goals.map((GoalModel x) => x.toJson()).toList(),
-      'emergencyReservations': emergencyReservations
+      'emergencyReserves': emergencyReserves
           .map((EmergencyReserveModel x) => x.toJson())
           .toList(),
       'opportunities':
           opportunities.map((OpportunityModel x) => x.toJson()).toList(),
     };
+  }
+
+  UserModel copyWith({
+    String? name,
+    String? email,
+    List<IncomeModel>? incomes,
+    List<ExpenseModel>? expenses,
+    List<InvestmentModel>? investments,
+    List<DebtModel>? debts,
+    List<GoalModel>? goals,
+    List<EmergencyReserveModel>? emergencyReserves,
+    List<OpportunityModel>? opportunities,
+  }) {
+    return UserModel(
+      name: name ?? this.name,
+      email: email ?? this.email,
+      incomes: incomes ?? this.incomes,
+      expenses: expenses ?? this.expenses,
+      investments: investments ?? this.investments,
+      debts: debts ?? this.debts,
+      goals: goals ?? this.goals,
+      emergencyReserves: emergencyReserves ?? this.emergencyReserves,
+      opportunities: opportunities ?? this.opportunities,
+    );
   }
 }
 

@@ -1,5 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:mobx/mobx.dart';
+import 'package:personal_finances/src/global_states/user/user_model.dart';
+import 'package:personal_finances/src/global_states/user/user_service.dart';
 import 'package:personal_finances/src/pages/sigin_up/sigin_up_errors.dart';
 import 'package:personal_finances/src/pages/sigin_up/sigin_up_service.dart';
 
@@ -8,7 +10,8 @@ part 'sigin_up_controller.g.dart';
 class SiginUpController = SiginUpControllerBase with _$SiginUpController;
 
 abstract class SiginUpControllerBase with Store {
-  SiginUpService service = SiginUpService();
+  final SiginUpService siginUpService = SiginUpService();
+  final UserService userService = UserService();
 
   @observable
   String email = '';
@@ -32,22 +35,23 @@ abstract class SiginUpControllerBase with Store {
   @observable
   bool userCreated = false;
 
+  @action
   Future<void> createUserWithEmailAndPasswordUsecase() async {
-    clearError();
+    _clearError();
 
     if (password == confirmPassword) {
       final Either<Exception, Unit> response =
-          await service.createUserWithEmailAndPassword(
+          await siginUpService.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
 
       response.fold(
-        (Exception l) => setError(fail: l),
-        (Unit r) => setUserCreated(),
+        (Exception l) => _setError(fail: l),
+        (Unit r) => _setNewUser(),
       );
     } else {
-      setError(fail: DifferentPasswordsError());
+      _setError(fail: DifferentPasswordsError());
     }
   }
 
@@ -71,15 +75,29 @@ abstract class SiginUpControllerBase with Store {
     messageError = message;
   }
 
-  void setError({required Exception fail}) {
+  void _setError({required Exception fail}) {
     hasError = optionOf(fail);
   }
 
-  void clearError() {
+  void _clearError() {
     hasError = none();
   }
 
-  void setUserCreated() {
+  void _setNewUser() async {
+    try {
+      final UserModel userModel = UserModel(email: email);
+
+      await userService.setUser(
+        userModel: userModel,
+      );
+
+      _setUserCreated();
+    } catch (e) {
+      _setError(fail: Exception());
+    }
+  }
+
+  void _setUserCreated() {
     userCreated = true;
   }
 }
